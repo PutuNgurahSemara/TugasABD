@@ -2,7 +2,8 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime
-import matplotlib.pyplot as plt
+import plotly.express as px
+import plotly.graph_objects as go
 import os
 
 # =====================================================
@@ -388,12 +389,331 @@ def tabelProducts_dan_chart():
 
 
 # =====================================================
+# FUNGSI: DASHBOARD UTAMA
+# =====================================================
+def dashboard_utama():
+    """Menampilkan dashboard utama dengan berbagai visualisasi"""
+    
+    # Header
+    st.title("🎓 Tugas Praktikum ABD ASIK")
+    st.markdown("---")
+    
+    # Dropdown untuk memilih jenis visualisasi
+    st.subheader("📊 Pilih Jenis Visualisasi")
+    visualization_type = st.selectbox(
+        "Pilih tipe chart yang ingin ditampilkan:",
+        ["Pie Chart", "Area Chart", "Bar Chart", "Line Chart", "Map (Geographic)"],
+        key="viz_type"
+    )
+    
+    st.markdown("---")
+    
+    # PIE CHART
+    if visualization_type == "Pie Chart":
+        st.header("🥧 Pie Chart - Distribusi Produk Berdasarkan Kategori Harga")
+        st.markdown("""
+        **Deskripsi:** Pie chart ini menampilkan distribusi produk berdasarkan kategori harga.
+        Produk dikategorikan menjadi Low, Medium, High, dan Premium berdasarkan harga jualnya.
+        Visualisasi ini membantu memahami komposisi produk di toko berdasarkan segmen harga.
+        """)
+        
+        # Kategorisasi produk berdasarkan harga
+        df_prod = df_products.copy()
+        df_prod['price'] = pd.to_numeric(df_prod['price'], errors='coerce')
+        
+        # Buat kategori harga
+        df_prod['price_category'] = pd.cut(df_prod['price'], 
+                                            bins=[0, 30000, 60000, 80000, float('inf')],
+                                            labels=['Low (< 30k)', 'Medium (30k-60k)', 'High (60k-80k)', 'Premium (> 80k)'])
+        
+        category_counts = df_prod['price_category'].value_counts()
+        
+        # Buat pie chart dengan Plotly (INTERAKTIF)
+        fig = px.pie(
+            values=category_counts.values,
+            names=category_counts.index,
+            title='Distribusi Produk Berdasarkan Kategori Harga',
+            color_discrete_sequence=['#ff9999', '#66b3ff', '#99ff99', '#ffcc99'],
+            hole=0.3  # Donut chart
+        )
+        fig.update_traces(
+            textposition='inside',
+            textinfo='percent+label',
+            hovertemplate='<b>%{label}</b><br>Jumlah: %{value}<br>Persentase: %{percent}<extra></extra>'
+        )
+        fig.update_layout(
+            height=500,
+            font=dict(size=14),
+            showlegend=True
+        )
+        st.plotly_chart(fig, use_container_width=True)
+        
+        # Tampilkan statistik
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.metric("Total Produk", len(df_prod))
+        with col2:
+            most_common = category_counts.index[0]
+            st.metric("Kategori Terbanyak", most_common)
+        with col3:
+            avg_price = df_prod['price'].mean()
+            st.metric("Rata-rata Harga", f"Rp {avg_price:,.0f}")
+    
+    # AREA CHART
+    elif visualization_type == "Area Chart":
+        st.header("📈 Area Chart - Tren Pendapatan Harian")
+        st.markdown("""
+        **Deskripsi:** Area chart ini menunjukkan tren pendapatan dari waktu ke waktu.
+        Setiap titik merepresentasikan total pendapatan per hari, dan area yang terisi
+        memberikan visualisasi kumulatif yang mudah dibaca. Berguna untuk melihat
+        pola penjualan dan mengidentifikasi periode puncak atau penurunan.
+        """)
+        
+        if not df_order_details.empty:
+            df_orders = df_order_details.copy()
+            df_orders['order_date'] = pd.to_datetime(df_orders['order_date'])
+            df_orders['subtotal'] = pd.to_numeric(df_orders['subtotal'], errors='coerce')
+            
+            # Agregasi pendapatan per hari
+            daily_revenue = df_orders.groupby(df_orders['order_date'].dt.date)['subtotal'].sum().reset_index()
+            daily_revenue.columns = ['Date', 'Revenue']
+            daily_revenue = daily_revenue.sort_values('Date')
+            
+            # Buat area chart dengan Plotly (INTERAKTIF)
+            fig = px.area(
+                daily_revenue,
+                x='Date',
+                y='Revenue',
+                title='Tren Pendapatan Harian',
+                labels={'Revenue': 'Pendapatan (Rp)', 'Date': 'Tanggal'}
+            )
+            fig.update_traces(
+                line_color='#0d47a1',
+                fillcolor='rgba(31, 119, 180, 0.3)',
+                hovertemplate='<b>Tanggal:</b> %{x}<br><b>Pendapatan:</b> Rp %{y:,.0f}<extra></extra>'
+            )
+            fig.update_layout(
+                height=500,
+                hovermode='x unified',
+                xaxis_title='Tanggal',
+                yaxis_title='Pendapatan (Rp)',
+                font=dict(size=12)
+            )
+            st.plotly_chart(fig, use_container_width=True)
+            
+            # Statistik
+            col1, col2, col3, col4 = st.columns(4)
+            with col1:
+                total_rev = daily_revenue['Revenue'].sum()
+                st.metric("Total Pendapatan", f"Rp {total_rev:,.0f}")
+            with col2:
+                avg_rev = daily_revenue['Revenue'].mean()
+                st.metric("Rata-rata/Hari", f"Rp {avg_rev:,.0f}")
+            with col3:
+                max_rev = daily_revenue['Revenue'].max()
+                st.metric("Pendapatan Tertinggi", f"Rp {max_rev:,.0f}")
+            with col4:
+                days = len(daily_revenue)
+                st.metric("Hari Transaksi", f"{days} hari")
+        else:
+            st.warning("Tidak ada data order untuk ditampilkan.")
+    
+    # BAR CHART
+    elif visualization_type == "Bar Chart":
+        st.header("📊 Bar Chart - Top 15 Produk Terlaris")
+        st.markdown("""
+        **Deskripsi:** Bar chart horizontal ini menampilkan 15 produk dengan penjualan tertinggi
+        berdasarkan jumlah unit terjual. Setiap bar merepresentasikan satu produk, dengan
+        panjang bar menunjukkan volume penjualan. Visualisasi ini memudahkan identifikasi
+        produk best-seller dan membantu strategi inventory management.
+        """)
+        
+        if not df_order_details.empty:
+            df_sales = df_order_details.copy()
+            df_sales['quantity'] = pd.to_numeric(df_sales['quantity'], errors='coerce').fillna(0)
+            
+            # Agregasi penjualan per produk
+            product_sales = df_sales.groupby('product_name')['quantity'].sum().sort_values(ascending=True).tail(15).reset_index()
+            product_sales.columns = ['Product', 'Quantity']
+            
+            # Buat bar chart horizontal dengan Plotly (INTERAKTIF)
+            fig = px.bar(
+                product_sales,
+                x='Quantity',
+                y='Product',
+                orientation='h',
+                title='Top 15 Produk Terlaris',
+                labels={'Quantity': 'Jumlah Terjual (Unit)', 'Product': 'Nama Produk'},
+                color='Quantity',
+                color_continuous_scale='Viridis'
+            )
+            fig.update_traces(
+                hovertemplate='<b>%{y}</b><br>Terjual: %{x:,} unit<extra></extra>'
+            )
+            fig.update_layout(
+                height=600,
+                showlegend=False,
+                xaxis_title='Jumlah Terjual (Unit)',
+                yaxis_title='Nama Produk',
+                font=dict(size=12)
+            )
+            st.plotly_chart(fig, use_container_width=True)
+            
+            # Statistik
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                total_sold = df_sales['quantity'].sum()
+                st.metric("Total Unit Terjual", f"{int(total_sold):,}")
+            with col2:
+                best_seller = product_sales.index[-1]
+                st.metric("Best Seller", best_seller)
+            with col3:
+                best_qty = product_sales.values[-1]
+                st.metric("Terjual", f"{int(best_qty):,} unit")
+        else:
+            st.warning("Tidak ada data penjualan untuk ditampilkan.")
+    
+    # LINE CHART
+    elif visualization_type == "Line Chart":
+        st.header("📉 Line Chart - Tren Jumlah Order Per Hari")
+        st.markdown("""
+        **Deskripsi:** Line chart ini menampilkan tren jumlah order yang masuk per hari.
+        Setiap titik pada garis merepresentasikan total order dalam satu hari.
+        Visualisasi ini berguna untuk menganalisis pola pemesanan, mengidentifikasi
+        hari-hari sibuk, dan merencanakan kapasitas operasional.
+        """)
+        
+        if not df_order_details.empty:
+            df_orders = df_order_details.copy()
+            df_orders['order_date'] = pd.to_datetime(df_orders['order_date'])
+            
+            # Hitung jumlah order per hari
+            daily_orders = df_orders.groupby(df_orders['order_date'].dt.date)['order_id'].nunique().reset_index()
+            daily_orders.columns = ['Date', 'Orders']
+            daily_orders = daily_orders.sort_values('Date')
+            
+            # Buat line chart dengan Plotly (INTERAKTIF)
+            fig = px.line(
+                daily_orders,
+                x='Date',
+                y='Orders',
+                title='Tren Jumlah Order Per Hari',
+                labels={'Orders': 'Jumlah Order', 'Date': 'Tanggal'},
+                markers=True
+            )
+            fig.update_traces(
+                line_color='#d32f2f',
+                marker=dict(size=8),
+                hovertemplate='<b>Tanggal:</b> %{x}<br><b>Jumlah Order:</b> %{y}<extra></extra>'
+            )
+            fig.update_layout(
+                height=500,
+                hovermode='x unified',
+                xaxis_title='Tanggal',
+                yaxis_title='Jumlah Order',
+                font=dict(size=12)
+            )
+            st.plotly_chart(fig, use_container_width=True)
+            
+            # Statistik
+            col1, col2, col3, col4 = st.columns(4)
+            with col1:
+                total_orders = df_orders['order_id'].nunique()
+                st.metric("Total Order", f"{total_orders:,}")
+            with col2:
+                avg_orders = daily_orders['Orders'].mean()
+                st.metric("Rata-rata/Hari", f"{avg_orders:.1f}")
+            with col3:
+                max_orders = daily_orders['Orders'].max()
+                st.metric("Order Terbanyak", f"{int(max_orders)}")
+            with col4:
+                active_days = len(daily_orders)
+                st.metric("Hari Aktif", f"{active_days} hari")
+        else:
+            st.warning("Tidak ada data order untuk ditampilkan.")
+    
+    # MAP (GEOGRAPHIC)
+    elif visualization_type == "Map (Geographic)":
+        st.header("🗺️ Map - Distribusi Pelanggan Berdasarkan Lokasi")
+        st.markdown("""
+        **Deskripsi:** Visualisasi geografis ini menampilkan distribusi pelanggan berdasarkan
+        lokasi atau wilayah. Dalam implementasi ini, kami menampilkan bar chart untuk
+        distribusi berdasarkan kota (karena data GPS tidak tersedia). Visualisasi ini
+        membantu memahami jangkauan geografis bisnis dan area potensial untuk ekspansi.
+        """)
+        
+        if not df_customers.empty:
+            # Ekstrak informasi kota dari alamat (simulasi)
+            df_cust = df_customers.copy()
+            
+            # Simulasi: buat kategori wilayah berdasarkan pattern alamat
+            import random
+            cities = ['Jakarta', 'Surabaya', 'Bandung', 'Medan', 'Semarang', 'Makassar', 'Palembang', 'Denpasar']
+            df_cust['city'] = [random.choice(cities) for _ in range(len(df_cust))]
+            
+            city_counts = df_cust['city'].value_counts().sort_values(ascending=True).reset_index()
+            city_counts.columns = ['City', 'Count']
+            
+            # Buat bar chart untuk distribusi kota dengan Plotly (INTERAKTIF)
+            fig = px.bar(
+                city_counts,
+                x='Count',
+                y='City',
+                orientation='h',
+                title='Distribusi Pelanggan Berdasarkan Kota',
+                labels={'Count': 'Jumlah Pelanggan', 'City': 'Kota'},
+                color='Count',
+                color_continuous_scale='Teal'
+            )
+            fig.update_traces(
+                hovertemplate='<b>%{y}</b><br>Pelanggan: %{x:,} orang<extra></extra>'
+            )
+            fig.update_layout(
+                height=500,
+                showlegend=False,
+                xaxis_title='Jumlah Pelanggan',
+                yaxis_title='Kota',
+                font=dict(size=12)
+            )
+            st.plotly_chart(fig, use_container_width=True)
+            
+            # Statistik
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                total_cust = len(df_cust)
+                st.metric("Total Pelanggan", f"{total_cust:,}")
+            with col2:
+                num_cities = len(city_counts)
+                st.metric("Jangkauan Kota", f"{num_cities} kota")
+            with col3:
+                top_city = city_counts.index[-1]
+                st.metric("Kota Terbanyak", top_city)
+            
+            st.info("💡 **Catatan:** Data geografis ini adalah simulasi untuk tujuan demonstrasi. Dalam implementasi nyata, gunakan koordinat GPS untuk visualisasi peta interaktif.")
+        else:
+            st.warning("Tidak ada data pelanggan untuk ditampilkan.")
+
+# =====================================================
 # SIDEBAR: NAVIGASI
 # =====================================================
-st.sidebar.success("Pilih Tabel:")
-if st.sidebar.checkbox("Tampilkan Pelanggan"):
+st.sidebar.title("🧭 Navigasi")
+st.sidebar.markdown("---")
+
+menu_option = st.sidebar.radio(
+    "Pilih Menu:",
+    ["Dashboard Utama", "Data Pelanggan", "Data Produk", "Data Order"],
+    key="main_menu"
+)
+
+st.sidebar.markdown("---")
+st.sidebar.info("**Tugas Praktikum ABD**\n\nStreamlit Dashboard v1.0")
+
+# Routing menu
+if menu_option == "Dashboard Utama":
+    dashboard_utama()
+elif menu_option == "Data Pelanggan":
     tabelCustomers_dan_export()
-if st.sidebar.checkbox("Tampilkan Produk"):
+elif menu_option == "Data Produk":
     tabelProducts_dan_chart()
-if st.sidebar.checkbox("Tampilkan Order"):
+elif menu_option == "Data Order":
     tabelOrders_dan_chart()
