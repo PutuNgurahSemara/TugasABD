@@ -397,7 +397,7 @@ def dashboard_utama():
     # Header
     st.title("🎓 Tugas Praktikum ABD ASIK")
     st.markdown("---")
-    
+    st.image("peakpx.jpg", caption="Gambar tambahan ga tau fungsinya apaan")
     # Dropdown untuk memilih jenis visualisasi
     st.subheader("📊 Pilih Jenis Visualisasi")
     visualization_type = st.selectbox(
