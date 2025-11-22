@@ -6,9 +6,6 @@ import plotly.graph_objects as go
 from datetime import datetime
 import numpy as np
 
-# Import fungsi dari config.py
-from config import *
-
 # =====================================================
 # KONFIGURASI HALAMAN
 # =====================================================
@@ -54,28 +51,16 @@ st.markdown("""
 # =====================================================
 @st.cache_data(ttl=300)
 def load_data():
-    """Load semua data dari database dengan caching"""
-    # Data pelanggan
-    result_customers = view_customers()
-    df_customers = pd.DataFrame(result_customers, columns=[
-        "customer_id", "name", "email", "phone", "address", "birthdate"
-    ])
-    
-    # Data produk
-    result_products = view_products()
-    df_products = pd.DataFrame(result_products, columns=[
-        "product_id", "name", "description", "price", "stock"
-    ])
-    
-    # Data order details
-    result_order_details = view_order_details_with_info()
-    df_order_details = pd.DataFrame(result_order_details, columns=[
-        "order_detail_id", "order_id", "order_date", "customer_id", "customer_name",
-        "product_id", "product_name", "unit_price", "quantity", "subtotal",
-        "order_total", "phone"
-    ])
-    
-    return df_customers, df_products, df_order_details
+    """Load semua data dari CSV files"""
+    try:
+        # Load dari CSV
+        df_customers = pd.read_csv('data/customers.csv')
+        df_products = pd.read_csv('data/products.csv')
+        df_order_details = pd.read_csv('data/order_details.csv')
+        return df_customers, df_products, df_order_details
+    except FileNotFoundError:
+        st.error("⚠️ File CSV tidak ditemukan! Pastikan folder 'data' berisi file CSV.")
+        st.stop()
 
 df_customers, df_products, df_order_details = load_data()
 

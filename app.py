@@ -3,10 +3,7 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 import matplotlib.pyplot as plt
-
-
-# Import fungsi dari config.py
-from config import *
+import os
 
 # =====================================================
 # KONFIGURASI HALAMAN
@@ -14,27 +11,23 @@ from config import *
 st.set_page_config("Dashboard Sales", page_icon="📊", layout="wide")
 
 # =====================================================
-# LOAD DATA DARI DATABASE
+# LOAD DATA DARI CSV
 # =====================================================
-# Data pelanggan
-result_customers = view_customers()
-df_customers = pd.DataFrame(result_customers, columns=[
-    "customer_id", "name", "email", "phone", "address", "birthdate"
-])
+@st.cache_data
+def load_data():
+    """Load data dari CSV files"""
+    try:
+        # Coba load dari folder data
+        df_customers = pd.read_csv('data/customers.csv')
+        df_products = pd.read_csv('data/products.csv')
+        df_order_details = pd.read_csv('data/order_details.csv')
+        return df_customers, df_products, df_order_details
+    except FileNotFoundError:
+        st.error("⚠️ File CSV tidak ditemukan! Pastikan folder 'data' berisi file CSV.")
+        st.stop()
 
-# Data produk
-result_products = view_products()
-df_products = pd.DataFrame(result_products, columns=[
-    "product_id", "name", "description", "price", "stock"
-])
-
-# Data order details (untuk analisis pembelian barang)
-result_order_details = view_order_details_with_info()
-df_order_details = pd.DataFrame(result_order_details, columns=[
-    "order_detail_id", "order_id", "order_date", "customer_id", "customer_name",
-    "product_id", "product_name", "unit_price", "quantity", "subtotal",
-    "order_total", "phone"
-])
+# Load data
+df_customers, df_products, df_order_details = load_data()
 
 # =====================================================
 # PREPROCESSING DATA

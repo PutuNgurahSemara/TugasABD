@@ -1,0 +1,101 @@
+customer_id,name,email,phone,address,birthdate
+6,Andi Dewanti,customer6_2536@example.com,08123938847,"Jl. Diponegoro No. 50, Tangerang",1972-07-31
+3,Andi Irawan,customer3_3818@example.com,08422324437,"Jl. Melati No. 55, Surabaya",1989-07-11
+72,Andi Melati,customer72_9490@example.com,08183242616,"Jl. Gatot Subroto No. 76, Tangerang",1994-09-27
+52,Andi Melati,customer52_5784@example.com,08314046119,"Jl. Pahlawan No. 21, Jakarta Pusat",1987-02-02
+7,Andi Rahman,customer7_8090@example.com,08038955039,"Jl. Melati No. 147, Bekasi",1993-11-21
+48,Andi Santoso,customer48_4757@example.com,08982556640,"Jl. Raya Bandung No. 153, Bandung",2005-08-08
+53,Ayu Puspita,customer53_4801@example.com,08506833071,"Jl. TB Simatupang No. 187, Malang",1992-12-02
+60,Ayu Rahayu,customer60_3988@example.com,08175039334,"Jl. Cendana No. 116, Depok",1999-01-30
+99,Ayu Safitri,customer99_7122@example.com,08948356090,"Jl. TB Simatupang No. 41, Balikpapan",1977-05-05
+92,Ayu Utami,customer92_9633@example.com,08000742619,"Jl. Raya Bandung No. 138, Jakarta Utara",1983-09-24
+47,Bambang Anggraini,customer47_2596@example.com,08207541960,"Jl. Cendana No. 60, Solo",2004-01-07
+68,Bambang Dewanti,customer68_2122@example.com,08413495129,"Jl. Asia Afrika No. 91, Makassar",1973-12-27
+2,Bambang Dewanti,customer2_186@example.com,08873072742,"Jl. Raya Bandung No. 91, Jakarta Pusat",2000-12-24
+1,Bambang Firmansyah,customer1_8810@example.com,08564715049,"Jl. Diponegoro No. 111, Palembang",1988-03-14
+24,Bambang Handayani,customer24_8668@example.com,08097608569,"Jl. TB Simatupang No. 12, Jakarta Selatan",1996-01-03
+34,Bambang Hidayat,customer34_9223@example.com,08339990384,"Jl. Flamboyan No. 80, Semarang",2005-02-04
+13,Bambang Saputra,customer13_2274@example.com,08049712777,"Jl. Cendana No. 66, Denpasar",1998-07-07
+80,Budi Pratama,customer80_1041@example.com,08646216928,"Jl. Ahmad Yani No. 139, Palembang",1980-05-13
+31,Budi Safitri,customer31_4982@example.com,08272970225,"Jl. Asia Afrika No. 57, Palembang",1988-04-15
+15,Budi Santoso,customer15_5811@example.com,08276512680,"Jl. Ahmad Yani No. 92, Bekasi",1974-07-13
+55,Budi Sari,customer55_4511@example.com,08786426766,"Jl. Kuningan No. 114, Tangerang",1996-09-12
+64,Candra Rahayu,customer64_2385@example.com,08263301663,"Jl. Pahlawan No. 145, Palembang",1988-03-23
+42,Candra Rahman,customer42_567@example.com,08024003539,"Jl. Diponegoro No. 197, Semarang",1974-02-12
+54,Candra Wibowo,customer54_2539@example.com,08208358347,"Jl. Mawar No. 123, Surabaya",1978-03-10
+98,Citra Wijaya,customer98_1983@example.com,08533845463,"Jl. Mawar No. 83, Denpasar",1977-01-17
+77,Dewi Firmansyah,customer77_5108@example.com,08799293957,"Jl. Gatot Subroto No. 62, Balikpapan",1993-09-06
+89,Dewi Sari,customer89_3893@example.com,08109299718,"Jl. Merdeka No. 139, Surabaya",1992-11-10
+78,Dewi Utami,customer78_5485@example.com,08070176106,"Jl. Raya Bogor No. 74, Palembang",1970-01-03
+32,Dian Lestari,customer32_4015@example.com,08525543182,"Jl. Thamrin No. 46, Surabaya",1993-05-28
+35,Dian Pratama,customer35_7504@example.com,08907006525,"Jl. Gatot Subroto No. 7, Tangerang",2002-05-31
+76,Dian Utami,customer76_2326@example.com,08029840910,"Jl. Merdeka No. 126, Jakarta Barat",1975-02-21
+66,Eko Firmansyah,customer66_501@example.com,08585001821,"Jl. Raya Bandung No. 127, Bogor",1997-04-14
+73,Eko Firmansyah,customer73_7969@example.com,08475635653,"Jl. Kenanga No. 103, Tangerang",2005-11-07
+83,Fitri Hakim,customer83_3534@example.com,08509860415,"Jl. Anggrek No. 31, Malang",1984-03-18
+40,Gita Budiman,customer40_7623@example.com,08855071339,"Jl. TB Simatupang No. 10, Jakarta Barat",1996-06-15
+46,Gita Irawan,customer46_9486@example.com,08335074925,"Jl. Merdeka No. 33, Solo",1994-06-13
+97,Gita Kartini,customer97_8065@example.com,08740206449,"Jl. Diponegoro No. 187, Jakarta Timur",1974-02-24
+22,Gita Utami,customer22_950@example.com,08376939726,"Jl. Asia Afrika No. 179, Denpasar",2005-08-14
+23,Hendra Irawan,customer23_186@example.com,08942878718,"Jl. Gatot Subroto No. 73, Palembang",1990-07-16
+18,Indah Dewanti,customer18_5209@example.com,08473871095,"Jl. Pemuda No. 72, Semarang",2000-07-17
+61,Indah Kartini,customer61_2454@example.com,08776523811,"Jl. Kuningan No. 43, Bekasi",1973-10-20
+39,Joko Kusuma,customer39_1670@example.com,08202443707,"Jl. Kartini No. 80, Bogor",2001-06-22
+28,Joko Lestari,customer28_5133@example.com,08883096757,"Jl. Flamboyan No. 85, Depok",1991-10-12
+37,Joko Permata,customer37_5426@example.com,08286517931,"Jl. Mawar No. 145, Semarang",1984-07-24
+43,Joko Wibowo,customer43_9609@example.com,08807983413,"Jl. Asia Afrika No. 15, Bogor",1986-10-26
+14,Kartika Budiman,customer14_827@example.com,08464586464,"Jl. Flamboyan No. 122, Malang",1977-04-07
+5,Kartika Handayani,customer5_3658@example.com,08779740543,"Jl. Raya Bogor No. 35, Jakarta Selatan",1985-08-16
+16,Kartika Puspita,customer16_2410@example.com,08096596216,"Jl. Anggrek No. 104, Depok",1985-11-10
+74,Kartika Rahayu,customer74_2797@example.com,08086387437,"Jl. Raya Bandung No. 12, Medan",1988-04-02
+86,Kartika Sari,customer86_9797@example.com,08584582849,"Jl. Ahmad Yani No. 198, Makassar",1974-04-16
+41,Kartika Utami,customer41_8851@example.com,08542103844,"Jl. Diponegoro No. 119, Medan",2003-04-04
+11,Lukman Dewanti,customer11_9712@example.com,08259917645,"Jl. Sudirman No. 6, Surabaya",1997-11-09
+51,Lukman Firmansyah,customer51_1427@example.com,08189124182,"Jl. Asia Afrika No. 70, Bandung",1998-05-10
+59,Lukman Gunawan,customer59_4183@example.com,08606803848,"Jl. Cendana No. 136, Makassar",1971-08-15
+19,Lukman Lestari,customer19_2404@example.com,08327468692,"Jl. Asia Afrika No. 71, Jakarta Timur",1975-03-20
+8,Lukman Santoso,customer8_267@example.com,08428649823,"Jl. Melati No. 27, Jakarta Barat",1990-03-04
+30,Lukman Santoso,customer30_8089@example.com,08692185210,"Jl. Raya Bandung No. 52, Solo",1980-06-01
+12,Maya Hidayat,customer12_3628@example.com,08832786730,"Jl. Raya Bandung No. 27, Bekasi",1985-07-30
+71,Nina Anggraini,customer71_2814@example.com,08091403060,"Jl. Raya Bandung No. 182, Medan",1972-07-18
+96,Nina Wibowo,customer96_6775@example.com,08454610182,"Jl. Asia Afrika No. 23, Bogor",1995-01-31
+44,Oscar Utami,customer44_7938@example.com,08253556204,"Jl. Flamboyan No. 71, Medan",1988-01-22
+95,Putri Irawan,customer95_6369@example.com,08647852803,"Jl. Pemuda No. 106, Solo",1987-04-13
+88,Putri Puspita,customer88_6379@example.com,08339821399,"Jl. Cendana No. 11, Jakarta Pusat",1996-04-20
+69,Qori Hakim,customer69_9405@example.com,08245986235,"Jl. Kuningan No. 25, Tangerang",2005-04-25
+91,Qori Putra,customer91_3776@example.com,08868996401,"Jl. Raya Bandung No. 115, Makassar",1983-12-10
+87,Rina Kusuma,customer87_2613@example.com,08592885286,"Jl. Raya Bogor No. 7, Balikpapan",1999-10-20
+20,Rina Wibowo,customer20_7672@example.com,08996869439,"Jl. Veteran No. 30, Depok",2001-06-28
+9,Siti Nugroho,customer9_6660@example.com,08632582860,"Jl. Raya Bandung No. 71, Balikpapan",1982-02-25
+27,Siti Putra,customer27_4955@example.com,08152726635,"Jl. Ahmad Yani No. 54, Surabaya",1988-01-02
+63,Siti Putra,customer63_5152@example.com,08793443413,"Jl. Veteran No. 60, Bogor",1982-10-10
+70,Siti Sari,customer70_5907@example.com,08388124391,"Jl. Cendana No. 187, Jakarta Utara",1996-02-21
+26,Siti Utami,customer26_8119@example.com,08159614473,"Jl. Gatot Subroto No. 55, Yogyakarta",1977-07-22
+56,Tono Anggraini,customer56_9488@example.com,08534231881,"Jl. Gatot Subroto No. 25, Palembang",1998-04-30
+29,Tono Melati,customer29_5916@example.com,08986737306,"Jl. Pahlawan No. 109, Makassar",1989-11-15
+62,Tono Nugroho,customer62_2840@example.com,08699934027,"Jl. Raya Bogor No. 170, Jakarta Utara",1982-08-12
+90,Tono Rahman,customer90_1944@example.com,08334408157,"Jl. Kenanga No. 79, Bekasi",1997-04-17
+85,Tono Rahman,customer85_688@example.com,08749124824,"Jl. Sudirman No. 81, Jakarta Selatan",2004-08-27
+84,Tono Wibowo,customer84_8963@example.com,08345284027,"Jl. Veteran No. 12, Surabaya",1976-06-08
+45,Umar Budiman,customer45_207@example.com,08858606418,"Jl. Pahlawan No. 118, Tangerang",1996-09-21
+82,Umar Hakim,customer82_2901@example.com,08656324111,"Jl. Thamrin No. 52, Semarang",2001-05-12
+57,Umar Irawan,customer57_3755@example.com,08933462360,"Jl. Thamrin No. 51, Tangerang",1993-09-08
+79,Umar Kartini,customer79_1053@example.com,08242155047,"Jl. Melati No. 39, Semarang",1982-08-13
+49,Umar Sari,customer49_2829@example.com,08154588001,"Jl. Thamrin No. 151, Bekasi",1999-06-05
+17,Vina Irawan,customer17_4276@example.com,08028084455,"Jl. Asia Afrika No. 31, Bogor",1975-07-06
+50,Vina Maharani,customer50_4799@example.com,08893933087,"Jl. Cendana No. 44, Bogor",1976-06-25
+58,Vina Puspita,customer58_9020@example.com,08902615510,"Jl. Asia Afrika No. 53, Jakarta Utara",1995-05-17
+81,Wati Hakim,customer81_6516@example.com,08064543918,"Jl. Merdeka No. 30, Jakarta Utara",1993-04-20
+25,Wati Kusuma,customer25_8578@example.com,08555106898,"Jl. Merdeka No. 197, Solo",1987-11-19
+38,Wati Puspita,customer38_497@example.com,08477167237,"Jl. Diponegoro No. 150, Jakarta Timur",1985-02-25
+65,Wati Rahayu,customer65_5113@example.com,08219296355,"Jl. Veteran No. 175, Surabaya",1991-02-11
+100,Wati Saputra,customer100_2544@example.com,08699474489,"Jl. Flamboyan No. 135, Semarang",1993-06-17
+10,Wati Utami,customer10_2654@example.com,08591190548,"Jl. Raya Bandung No. 76, Surabaya",1974-07-26
+33,Xena Firmansyah,customer33_9753@example.com,08082464856,"Jl. Melati No. 54, Medan",1980-03-19
+94,Xena Lestari,customer94_3234@example.com,08156453883,"Jl. Melati No. 114, Depok",1973-12-25
+4,Xena Prabowo,customer4_3112@example.com,08918748802,"Jl. Raya Bandung No. 48, Jakarta Barat",1997-07-08
+67,Yanto Budiman,customer67_8906@example.com,08468945233,"Jl. Mawar No. 68, Jakarta Timur",1985-10-03
+93,Yanto Lestari,customer93_6381@example.com,08626818065,"Jl. Pahlawan No. 57, Surabaya",1980-04-25
+36,Yanto Putra,customer36_367@example.com,08113374066,"Jl. Sudirman No. 163, Jakarta Selatan",1995-06-01
+21,Zaki Permata,customer21_5714@example.com,08706346094,"Jl. Raya Bandung No. 106, Makassar",1971-08-11
+75,Zaki Saputra,customer75_286@example.com,08027077049,"Jl. Raya Bandung No. 60, Denpasar",1970-05-17
